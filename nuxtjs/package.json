@@ -1,0 +1,27 @@
+{
+  "name": "nuxt_1",
+  "version": "1.0.0",
+  "description": "My spectacular Nuxt.js project",
+  "author": "nawikart",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "debounce": "^1.1.0",
+    "lodash": "^4.17.10",
+    "nuxt": "^1.0.0",
+    "v-debounce": "^0.1.2",
+    "vue-carousel": "^0.7.3",
+    "vuetify": "^0.17.3"
+  },
+  "devDependencies": {
+    "cross-env": "^5.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
+  }
+}

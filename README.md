@@ -50,6 +50,19 @@ CREATE TABLE hotels(
 
 
 4. import the earlier .csv into table hotels
+5. then add new column
+```bash
+ALTER TABLE hotels
+ADD COLUMN hotel_name_key character varying(255);
+
+UPDATE hotels SET hotel_name_key = regexp_replace(regexp_replace(LOWER(regexp_replace(hotel_name, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') WHERE hotel_id = hotel_id;
+
+ALTER TABLE hotels
+ADD COLUMN city_key character varying(50);
+
+UPDATE hotels SET city_key = regexp_replace(regexp_replace(LOWER(regexp_replace(city, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') WHERE hotel_id = hotel_id;
+
+```
 
 <br><br>
 # 2. TABLE countries
@@ -57,14 +70,14 @@ CREATE TABLE hotels(
 1. select group from table hotels then save into table countries + add primary key
 ``` bash
 CREATE TABLE countries AS
-SELECT country_id, country, countryisocode, regexp_replace(regexp_replace(LOWER(regexp_replace(country, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS country_key, count(country_id) as count from hotels GROUP BY country_id, country, countryisocode ORDER BY count(country_id) DESC;
+SELECT country_id, country, countryisocode, regexp_replace(regexp_replace(LOWER(regexp_replace(country, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS country_key, count(country_id) as hotels_count from hotels GROUP BY country_id, country, countryisocode ORDER BY count(country_id) DESC;
 
 ALTER TABLE countries ADD PRIMARY KEY (country_id);
 ```
 
 2. select top 24 of countries base on count then save into table top24countries + add primary key
 ``` bash
-CREATE TABLE top24countries AS SELECT * FROM countries ORDER BY count DESC LIMIT 24;
+CREATE TABLE top24countries AS SELECT * FROM countries ORDER BY hotels_count DESC LIMIT 24;
 
 ALTER TABLE top24countries ADD PRIMARY KEY (country_id);
 ```
@@ -75,32 +88,41 @@ ALTER TABLE top24countries ADD PRIMARY KEY (country_id);
 1. select group from table hotels then save into table cities + add primary key
 ``` bash
 CREATE TABLE cities AS
-SELECT city_id, city, regexp_replace(regexp_replace(LOWER(regexp_replace(city, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS city_key, count(city_id) as count from hotels GROUP BY city_id, city ORDER BY count(city_id) DESC;
+SELECT city_id, city, 
+regexp_replace(regexp_replace(LOWER(regexp_replace(city, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS city_key, 
+
+country,
+countryisocode,
+regexp_replace(regexp_replace(LOWER(regexp_replace(country, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS country_key,
+
+count(city_id) as hotels_count from hotels GROUP BY city_id, city, country, countryisocode ORDER BY count(city_id) DESC;
 
 ALTER TABLE cities ADD PRIMARY KEY (city_id);
 ```
 
 2. select top 24 of cities base on count then save into table top24cities + add primary key
 ``` bash
-CREATE TABLE top24cities AS SELECT * FROM cities ORDER BY count DESC LIMIT 24;
+CREATE TABLE top24cities AS SELECT * FROM cities ORDER BY hotels_count DESC LIMIT 24;
 
 ALTER TABLE top24cities ADD PRIMARY KEY (city_id);
 ```
 
 
 <br><br>
-# 2. TABLE autocomplete
+# 2. TABLE hotels4listing
 
-1. select group from table hotels then save into table autocomplete
+1. select group from table hotels then save into table hotels4listing
 ``` bash
-CREATE TABLE autocomplete AS
+CREATE TABLE hotels4listing AS
 SELECT hotel_id, hotel_name, city, country, countryisocode, 
 regexp_replace(regexp_replace(LOWER(regexp_replace(hotel_name, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS hotel_name_key, 
 regexp_replace(regexp_replace(LOWER(regexp_replace(city, '[^A-Za-z0-9]', '-', 'g')), '-+', '-', 'g'), '-$', '', 'g') AS city_key, 
+photo1,
+rates_from,
 rating_average,
 star_rating,
 number_of_reviews
 from hotels ORDER BY rating_average::float DESC, star_rating::float DESC, number_of_reviews DESC;
 
-ALTER TABLE autocomplete ADD PRIMARY KEY (hotel_id);
+ALTER TABLE hotels4listing ADD PRIMARY KEY (hotel_id);
 ```
