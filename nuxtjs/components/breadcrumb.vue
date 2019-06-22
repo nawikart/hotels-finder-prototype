@@ -10,7 +10,7 @@
 
 <script>
   export default {
-    props:{ data: Array },    
+    props:{ data: Object },    
   }
 </script>
 

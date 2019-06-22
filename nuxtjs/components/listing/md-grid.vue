@@ -20,7 +20,7 @@
     <v-layout wrap hidden-xs-only v-if="!loader">
       <v-flex xs12 sm6 item md4 v-for="(item, i) in items" :key="i"><!-- v-if="item.hotelId != '' && item.imageURL != undefined" -->
         <v-layout wrap white style="padding: 20px 3% 30px">
-          <v-flex xs4 sm12 img :style="'background: url('+ item.Photo +') no-repeat; background-position: center; background-size: cover!important; height: 240px; margin-bottom: 9px;'">
+          <v-flex xs4 sm12 img :style="'background: url('+ item.Photo1 +') no-repeat; background-position: center; background-size: cover!important; height: 240px; margin-bottom: 9px;'">
             <div class="heart ml-2 mt-2"><v-icon medium color="white">favorite_border</v-icon></div>
 
             <div class="badge-price" v-if="item.Rates_from != 0 || item.dailyRate">

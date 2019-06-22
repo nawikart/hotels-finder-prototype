@@ -22,7 +22,7 @@
         <v-card class="item">
           <v-container fluid grid-list-md>
             <v-layout wrap>
-              <v-flex xs4 sm12 img :style="'background: url('+ item.Photo +') no-repeat; background-size: cover; height: 185px; margin-bottom: 2px;'">
+              <v-flex xs4 sm12 img :style="'background: url('+ item.Photo1 +') no-repeat; background-size: cover; height: 185px; margin-bottom: 2px;'">
                 <div class="heart"><v-icon medium color="white">favorite_border</v-icon></div>
                 <div class="price subheading">${{ item.Rates_from }}</div>
               </v-flex>                  

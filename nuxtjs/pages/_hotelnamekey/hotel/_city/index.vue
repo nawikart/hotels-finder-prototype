@@ -64,7 +64,9 @@
                     <div class="display-1 text-xs-center orange--text">{{ detail.Hotel_name }}</div>
 
                     <div class="mt-2" style="display: table; margin: auto;">
-                        <stars :Star_rating="detail.Star_rating"></stars> &nbsp; &nbsp; (<b>{{ detail.Number_of_reviews }}</b> reviews)
+                        <!-- <stars :Star_rating="parseFloat(detail.Star_rating)"></stars> -->
+                        <stars :Star_rating="5"></stars>
+                         &nbsp; &nbsp; (<b>{{ detail.Number_of_reviews }}</b> reviews)
                     </div>
                     <p class="body-1 address mt-2" align="center">
                         <v-icon small>location_on</v-icon><span class="pt-2" style="margin-top: 9px; color: #777;">{{ detail.Addressline1 }}, {{ detail.City }}, {{ detail.Countryisocode }}</span> &nbsp; <a class="viewonmap blue--text" style="text-decoration: underline; font-size: 12px!important; white-space: nowrap;" v-on:click="openMap">view on map</a></p>
@@ -187,12 +189,12 @@
     import axios from 'axios'
     export default {
         data: () => ({
-            breadcrumb: [],
+            breadcrumb: {},
             map: false,
             mapData: [],
             overviewFull: false,
             photosCount: 4,
-            detail: [],
+            detail: {},
             hotelLoader: true,
             reviews: [{}, {}, {}, {}]
         }),
@@ -205,12 +207,11 @@
         },
 
         beforeMount() {
-            alert(2)
             this.hotelLoader = true
             axios.get(this.$store.state.apiPath +'/hotel/'+ this.$route.params.hotelnamekey +'/'+ this.$route.params.city).then(response => {
                 this.detail = response.data
-                console.log(response.data)
-                this.detail.Excerpt = this.detail.Overview.substr(0, 200);
+                this.detail.Overview = `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`
+                this.detail.Excerpt = (this.detail.Overview) ? this.detail.Overview.substr(0, 200) : '';
 
                 if(this.detail.Photo2 == ""){ this.detail.Photo2 = this.detail.Photo1 }
                 if(this.detail.Photo3 == ""){this.detail.Photo3 = this.detail.Photo1 }
@@ -218,7 +219,7 @@
 
                 this.hotelLoader = false
 
-                this.breadcrumb = {'city': response.data.City, 'citykey': response.data.Citykey, 'country': response.data.Country, 'countryisocode_lower': response.data.Countryisocode_lower, 'hotel_name': response.data.Hotel_name, 'hotel_namekey': response.data.Hotel_namekey}                
+                this.breadcrumb = {'city': response.data.City, 'citykey': response.data.City_key, 'country': response.data.Country, 'countryisocode': response.data.Countryisocode.toLowerCase(), 'hotel_name': response.data.Hotel_name, 'hotel_namekey': response.data.Hotel_name_key}                
             })
         }
     }
