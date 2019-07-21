@@ -2,10 +2,13 @@ package controllers
 
 import (
 	"../db/psql"
-	// "fmt"
+	"fmt"
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
+
+	"regexp"
+	"strings"	
 )
 
 func AutocompleteApi(w http.ResponseWriter, r *http.Request){
@@ -14,6 +17,10 @@ func AutocompleteApi(w http.ResponseWriter, r *http.Request){
 	
 	vars := mux.Vars(r)
 	keyword := vars["keyword"]
+
+	keyword2lower := strings.ToLower(keyword)
+	rg, _ := regexp.Compile(`[^a-z]`)
+	keywordOK := rg.ReplaceAllString(keyword2lower, "")
 
 	db, _ := psql.Connect()
 	defer db.Close()
@@ -24,7 +31,7 @@ func AutocompleteApi(w http.ResponseWriter, r *http.Request){
 	var as []Autocomplete
 
 	//// cities
-	rows, err := db.Query("SELECT * FROM cities WHERE city LIKE '%"+ keyword +"%' OR country LIKE '%"+ keyword +"%' LIMIT 5")
+	rows, err := db.Query("SELECT * FROM cities WHERE LOWER(regexp_replace(city, '[^A-Za-z]', '', 'g')) LIKE '%"+ keywordOK +"%' OR LOWER(regexp_replace(country, '[^A-Za-z]', '', 'g')) LIKE '%"+ keywordOK +"%' LIMIT 5")
 	if err != nil {
 		panic(err)
 	}	
@@ -34,7 +41,7 @@ func AutocompleteApi(w http.ResponseWriter, r *http.Request){
 			panic(err)
 		}
 		a.Type = "c"
-		a.Value = c.City
+		a.Value = fmt.Sprintf("%s", c.City) + ", " + fmt.Sprintf("%s", c.CountryIsoCode)
 		a.Key = c.City_key
 		a.HotelsCount = c.HotelsCount
 
@@ -42,7 +49,7 @@ func AutocompleteApi(w http.ResponseWriter, r *http.Request){
 	}	
 	
 	/////// hotels
-	rows, err = db.Query("SELECT * FROM hotels4listing WHERE hotel_name LIKE '%"+ keyword +"%' ORDER BY rating_average::float DESC, star_rating::float DESC, number_of_reviews DESC LIMIT 8")
+	rows, err = db.Query("SELECT * FROM hotels4listing WHERE LOWER(regexp_replace(hotel_name, '[^A-Za-z]', '', 'g')) LIKE '%"+ keywordOK +"%' ORDER BY rating_average::float DESC, star_rating::float DESC, number_of_reviews DESC LIMIT 8")
 	if err != nil {
 		panic(err)
 	}
@@ -54,7 +61,7 @@ func AutocompleteApi(w http.ResponseWriter, r *http.Request){
 			panic(err)
 		}
 		a.Type = "h"
-		a.Value = h.Hotel_name
+		a.Value = fmt.Sprintf("%s", h.Hotel_name) + ", " + fmt.Sprintf("%s", h.City) + ", " + fmt.Sprintf("%s", h.Countryisocode)
 		a.Key = h.Hotel_name_key
 		a.Rating_average = h.Rating_average
 

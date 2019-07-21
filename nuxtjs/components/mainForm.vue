@@ -117,7 +117,7 @@
               this.autocLoader = true           
               axios.get(this.$store.state.apiPath +'/autocomplete/' + this.searchQuery)
               .then(response => {
-                // console.log(response.data)
+                console.log(response.data)
                 this.items = response.data
 
                 if(this.items.length > 0){

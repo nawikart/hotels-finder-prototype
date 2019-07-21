@@ -12,6 +12,7 @@ func main() {
     r.PathPrefix("/media/").Handler(http.StripPrefix("/media/", http.FileServer(http.Dir("./media/"))))
 
     routes.APIs(r)
+    routes.Nuxtjs(r)
 
     fmt.Println("starting web server at http://localhost:8080/")
     http.ListenAndServe(":8080", r)

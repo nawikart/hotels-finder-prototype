@@ -174,28 +174,25 @@
               
               var dataFilter = {}
 
-              dataFilter['cityId'] = 'a' + this.cityId
+              // dataFilter['cityId'] = this.cityId.toString()
               dataFilter['sortBy'] = this.sortby 
 
               if(this.dailyRate_min > 0){
-                  dataFilter['dailyRate_min'] = 'a' + this.dailyRate_min
+                  dataFilter['dailyRate_min'] = this.dailyRate_min.toString()
               }
               if(this.dailyRate_max < 1000){
-                  dataFilter['dailyRate_max'] = 'a' + this.dailyRate_max
+                  dataFilter['dailyRate_max'] = this.dailyRate_max.toString()
               }
               if(this.minimumReviewScore > 0){ 
-                  dataFilter['minReviewScore'] = 'a' + this.minimumReviewScore 
+                  dataFilter['minReviewScore'] = this.minimumReviewScore.toString()
               }
               if(this.minimumStarRating > 0){
-                  dataFilter['minStarRating'] = 'a' + this.minimumStarRating
+                  dataFilter['minStarRating'] = this.minimumStarRating.toString()
               }
 
-              // alert(JSON.stringify(dataFilter))
-              // return false
-
               this.$emit('loading', true)
-              axios.get(this.$store.state.apiPath +'/front?mod=hotels&city_cc='+ this.$route.params.city +'&dataFilter='+ JSON.stringify(dataFilter)).then(response => {
-                // console.log(response.data)
+              axios.get(this.$store.state.apiPath +'/hotels/'+ this.$route.params.city +'/filter/'+ JSON.stringify(dataFilter)).then(response => {
+                console.log(response.data)
                 this.$emit('filterSubmit', response.data.Hotels)
               })              
           },

@@ -334,7 +334,7 @@
                   this.Pstart = this.Ps - this.PsMax + 2             
               }
               //////////////////////////////////////////
-
+              return false;
             })
           }
         },

@@ -20,5 +20,7 @@ type HotelDetail struct{
 }
 
 type Autocomplete struct{
-	Key, Type, Value, Count, Rating_average, HotelsCount interface {}
+	Key, Type interface {}
+	Value string
+	Count, Rating_average, HotelsCount interface {}
 }
