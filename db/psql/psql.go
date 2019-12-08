@@ -12,7 +12,7 @@ const (
 	port     = 25060
 	user     = "doadmin"
 	password = "ea4xruzd6cjyhfe5"
-	dbname   = "defaultdb"
+	dbname   = "agoda"
 )
 
 func Connect() (*sql.DB, error) {
