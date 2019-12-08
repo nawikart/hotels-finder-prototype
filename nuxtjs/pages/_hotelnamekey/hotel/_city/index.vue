@@ -169,13 +169,9 @@
                     <v-flex xs12 sm5 md4 offset-sm1 banner>
                         <div class="flex" style="min-height: 300px;">
                             <p align="center" class="blue--text"><a class="viewonmap blue--text" style="text-decoration: underline; font-size: 12px!important;" v-on:click="openMap">click view full map</a></p>
-                            <iframe src="http://localhost:8080/gmap" 
-                                    allowTransparency="true" frameborder="0"
-                                    style="background-color:lightgreen;" 
-                                    width="100%" height="300">
-                            </iframe>                        
+                            <img src="https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg" width="100%" />                        
                         </div>
-                        <div class="flex mt-3" style="background: url('/gallery/img-3.jpg') no-repeat; background-size: 100% 90vh;min-height: 300px;"></div>
+                        <div class="flex mt-3" style="background: url('https://cdn6.agoda.net/images/MAPS-1213/default/bkg-map-entry.svg') no-repeat; background-size: 100% 90vh;min-height: 300px;"></div>
                     </v-flex>
                 </v-layout>
             </v-container>
