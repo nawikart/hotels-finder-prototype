@@ -7,7 +7,7 @@
     <v-container fluid class="mainForm_container">
         <v-flex class="mainForm_wrapper">
             <div class="mainForm">
-                <p class="headline" align="center">Find your ideal hotel at the lowest prices.</p>
+                <p class="headline font-weight-light" align="center">Find your ideal hotel at the lowest prices.</p>
                 <!-- <span class="subheading">Get the best prices on 1,900,000+ properties, worldwide</span>       -->      
                 <mainForm></mainForm>                       
             </div> 
@@ -54,6 +54,9 @@
     }    
 }
 @media only screen and (max-width: 599px) { 
+  #mainParallax .mainForm_container{
+      top: 140px;
+  }
   #mainParallax .parallax{
     height: 540px!important;
   }

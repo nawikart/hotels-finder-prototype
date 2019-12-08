@@ -60,7 +60,7 @@
 
         <v-container fluid grid-list-xs v-if="!hotelLoader">
             <v-container grid-list-sm>
-                <v-flex xs11 md8 style="margin: 50px auto 0;">
+                <v-flex xs11 md8 style="margin: auto;">
                     <div class="display-1 text-xs-center orange--text">{{ detail.Hotel_name }}</div>
 
                     <div class="mt-2" style="display: table; margin: auto;">

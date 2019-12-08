@@ -33,16 +33,19 @@
       </v-flex>
 
       <v-flex xs12 md4 :order-xs3="filterbyreorder">
+        <div style="position: relative;">
           <v-subheader>Min. Review Score <span class="caption hint">{{ minimumReviewScore }} – 10</span></v-subheader>
           <v-card-text pl-2>
             <v-slider v-model="minimumReviewScore" min="0" max="10" step="1" color="red" thumb-color="red" thumb-label></v-slider>
           </v-card-text>
-
+        </div>
+        <div style="position: relative;">
           <v-subheader>Daily Rate (usd) <span class="caption hint">${{ dailyRate_min }} – ${{ dailyRate_max }}</span></v-subheader>
           <v-card-text>
             <v-slider v-model="dailyRate_min" label="Min." color="green" min="0" max="900" value="10" step="10" thumb-color="green" thumb-label></v-slider>
             <v-slider v-model="dailyRate_max" label="Max." color="green" min="10" max="1000" value="1000" step="10" thumb-color="green" thumb-label></v-slider>
           </v-card-text>
+        </div>
       </v-flex>
 
       <v-flex xs12 sm6 md4 :order-xs1="filterbyreorder">
@@ -284,6 +287,12 @@
 .mainFilter .subheader{
    position: relative;
 }
+.mainFilter .v-card__text{
+  padding: 0 16px 16px 16px;
+}
+.mainFilter .v-input--selection-controls{
+  margin-top: 0!important;
+}
 .mainFilter .card__text{
    padding: 5px 16px 20px;
 }
@@ -306,14 +315,13 @@
     position: relative;
 }
 .mainFilter .radioRow .caption{
-  float: left; margin-left: 10px; color: #666; margin-top: 8px;
+  float: left; margin-left: 10px; color: #666; margin-top: 5px;
 }
 .mainFilter .starsRadio{
-    width: 30px;
+    width: 15px;
     float: left;
 }
 .mainFilter .stars{
-  margin-top: 4px;
   float: left;
 }
 .mainFilter .stars i{

@@ -17,7 +17,7 @@
     "nuxt": "^1.0.0",
     "v-debounce": "^0.1.2",
     "vue-carousel": "^0.7.3",
-    "vuetify": "^0.17.3"
+    "vuetify": "^1.5.16"
   },
   "devDependencies": {
     "cross-env": "^5.0.1",

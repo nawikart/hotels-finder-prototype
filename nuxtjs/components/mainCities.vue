@@ -2,7 +2,7 @@
   <v-container id="gridCities" fluid grid-list-sm style="max-width: 1360px;">
 
     <v-flex xs11 md8 style="margin: 50px auto 0;">
-      <p class="display-1 text-xs-center orange--text">{{ topTitle }}</p>
+      <p class="display-1 font-weight-light text-xs-center orange--text">{{ topTitle }}</p>
       <p class="subheading text-xs-center">{{ topDes }}</p>
       <p align="center">
         <v-btn large dark :outline="!showCountries" color="green" v-on:click="countriesClicked()">Top Country</v-btn>
@@ -12,7 +12,6 @@
 
     <v-layout wrap gallery v-if="isCity && !ccLoader">
       <v-flex item xs6 sm4 md3 v-for="(item, i) in cities" :key="i" v-if="i < 12">
-        <div class="triangle"></div>
         <router-link :to="'/' + item.City_key + '-' + item.CountryIsoCode.toLowerCase()  + '-hotels.html'">
             <v-flex img :style="'background-image: url('+ $store.state.mediaPath +'/media/images/destination/'+ item.City_key +'.jpg); background-size: cover;'">
               <div class="overlay">
@@ -25,11 +24,13 @@
 
     <v-layout wrap gallery v-if="!isCity && !ccLoader">
       <v-flex item xs6 sm4 md3 v-for="(item, i) in countries" :key="i" v-on:click="countryClicked(item.Country_id, item.Country_key, item.Country)">
+          <a>
             <v-flex img :style="'background-image: url('+ $store.state.mediaPath +'/media/images/destination/'+ item.Country_key +'.jpg); background-size: cover; cursor: pointer;'">
               <div class="overlay">
                 <p class="subheading text-xs-center">{{item.Country}} ({{ item.HotelsCount }})</p>
               </div>
             </v-flex>
+          </a>
       </v-flex>
     </v-layout>
     <!-- <p align="center"><v-btn large dark outline color="grey" v-on:click="" style="border: none;">show more</v-btn></p> -->
@@ -130,6 +131,9 @@
 #gridCities .gallery .item{
   padding: 7px!important;
   position: relative;
+}
+#gridCities .gallery .item .flex{
+  padding: 0!important;
 }
 #gridCities .gallery .item a {
     display: block;

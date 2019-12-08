@@ -2,7 +2,7 @@
 	<div id="list">
       <v-layout wrap v-if="loader">
         <v-flex xs12 item v-for="i in 12" :key="i" px-1 py-2>
-          <div >
+          <div >  
             <v-layout wrap loader>
               <v-flex xs4 img style="height: 175px;background-color: #fafafa;">
               </v-flex>
@@ -21,10 +21,14 @@
           <div>
             <v-card>
                 <v-layout wrap>
+                  <v-flex my-1 xs4 img>
+                    <v-img
+                        :src="item.Photo1"
+                        :lazy-src="$store.state.mediaPath +'/media/images/loading.gif'"
+                        aspect-ratio="1.7"
+                        class="grey lighten-2" />
 
-                  <v-flex my-1 xs4 img :style="'background: url('+ item.Photo1 +') no-repeat; background-size: cover;'">
-                    <div class="heart mt-2 ml-2"><v-icon medium color="white">favorite_border</v-icon></div>
-
+                      <div class="heart mt-2 ml-2"><v-icon medium color="white">favorite_border</v-icon></div>
                       <div class="badge-price" v-if="item.Rates_from != 0 || item.dailyRate">
 
                         <div class="discount-ribbon middle" v-if="item.discountPercentage && item.discountPercentage != 0"><span class="discount-ribbon-discount">{{ item.discountPercentage }}%</span><span class="discount-ribbon-text">Discount</span></div>
@@ -40,7 +44,7 @@
 
                   <v-flex xs8 sm6 px-3 pt-1 pb-2 style="position: relative;">
                       
-                      <p class="title"><span class="subheading">
+                      <p><span class="subheading">
                         <router-link :to="item.Hotel_name_key + '/hotel/' + item.City_key + '-' + item.Countryisocode.toLowerCase() + '.html'" style="color: #444;"><b>{{ item.Hotel_name }}</b></router-link></span></p>
 
                       <p><stars :Star_rating="item.Star_rating"></stars> 

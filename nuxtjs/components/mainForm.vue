@@ -279,6 +279,9 @@
     color: #ccc;
     opacity: 1; 
 }
+.container.mainForm_style2{
+  padding-bottom: 5px!important;
+}
 #mainForm .overlay_mainForm{
   position: fixed;
   top: 0;
@@ -297,7 +300,7 @@
   top: 5px;
   width: 100%;
   font-size: 92%;
-  left: 10px;
+  left: 30px;
   text-shadow: 1px 1px 1px #eee;
   color: #999;
 }
@@ -306,6 +309,9 @@
   top: 36px;
   left: 6px;
   cursor: pointer;
+}
+#mainForm .v-icon.v-icon.v-icon--link{
+  margin: 2px;
 }
 #mainForm .mainSearch .full{
   width: 100%;
@@ -326,7 +332,6 @@
 }
 #mainForm .mainSearch .input{
   padding: 10px 6px 10px 35px;
-  margin-top: 25px;
   background: #fff; 
   font-size: 18px;
   color: #333;

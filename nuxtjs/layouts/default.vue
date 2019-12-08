@@ -30,7 +30,7 @@
           <!-- <v-toolbar-side-icon @click="drawer = !drawer" class="hidden-sm-and-down"></v-toolbar-side-icon> -->
 
           <!-- &nbsp; &nbsp;  -->
-          <router-link to="/" class="headline">
+          <router-link to="/" class="headline font-weight-regular">
             HOTELS DEMO
           </router-link>
         </div>
