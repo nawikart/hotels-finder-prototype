@@ -11,8 +11,8 @@ const (
 	host     = "db-postgresql-sgp1-agoda-do-user-4803185-0.db.ondigitalocean.com"
 	port     = 25060
 	user     = "doadmin"
-	password = "ea4xruzd6cjyhfe5"
-	dbname   = "agoda"
+	password = "btz4gefi370myn3z"
+	dbname   = "defaultdb"
 )
 
 func Connect() (*sql.DB, error) {
