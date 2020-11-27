@@ -1,3 +1,10 @@
+# PREPARE POSTGRESQL VIA CLI
+$sudo -i -u postgres
+postgres@user-pc:~$ psql
+postgres=# \l #list database
+postgres=# CREATE DATABASE hotels;
+
+
 # 1. TABLE hotels
 1. prepare main CSV (download)
 2. remove first row
@@ -44,12 +51,21 @@ CREATE TABLE hotels(
     number_of_reviews INTEGER,
     rating_average character varying(5),
     rates_currency character varying(3),
+    rates_from_exclusive character varying(8),
+    accommodation_type character varying(255),
     PRIMARY KEY (hotel_id)
 );
 ```
 
 
 4. import the earlier .csv into table hotels
+```bash
+COPY hotels
+FROM '/home/nawi/Downloads/hotels.csv'
+DELIMITER ','
+CSV HEADER;
+```
+
 5. then add new column
 ```bash
 ALTER TABLE hotels
