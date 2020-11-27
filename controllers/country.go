@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"../db/psql"
+	"github.com/nawikart/hotels-finder-prototype/db/psql"
 	"net/http"
 	"encoding/json"
 )

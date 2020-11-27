@@ -1,8 +1,8 @@
 package routes
 
 import (
-	ctx "../controllers"
 	"github.com/gorilla/mux"
+	ctx "github.com/nawikart/hotels-finder-prototype/controllers"
 )
 
 func APIs(r *mux.Router) {

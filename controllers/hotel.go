@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"../db/psql"
+	"github.com/nawikart/hotels-finder-prototype/db/psql"
 	"github.com/gorilla/mux"
 )
 

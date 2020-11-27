@@ -3,7 +3,7 @@ package main
 import (
         "fmt"
         "github.com/gorilla/mux"
-        "./routes"
+        "github.com/nawikart/hotels-finder-prototype/routes"
         "net/http"
 		)
 		    
