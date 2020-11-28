@@ -7,12 +7,20 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// const (
+// 	host     = "db-postgresql-sgp1-agoda-do-user-4803185-0.db.ondigitalocean.com"
+// 	port     = 25060
+// 	user     = "doadmin"
+// 	password = "btz4gefi370myn3z"
+// 	dbname   = "defaultdb"
+// )
+
 const (
-	host     = "db-postgresql-sgp1-agoda-do-user-4803185-0.db.ondigitalocean.com"
-	port     = 25060
-	user     = "doadmin"
-	password = "btz4gefi370myn3z"
-	dbname   = "defaultdb"
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "root"
+	dbname   = "hotels"
 )
 
 func Connect() (*sql.DB, error) {

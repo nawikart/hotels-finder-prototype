@@ -1,9 +1,13 @@
 # PREPARE POSTGRESQL VIA CLI
+``` bash
 $sudo -i -u postgres
 postgres@user-pc:~$ psql
+```
 postgres=# \l #list database
+
 postgres=# CREATE DATABASE hotels;
 
+ALTER USER user_name WITH PASSWORD 'new_password'; // change password
 
 # 1. TABLE hotels
 1. prepare main CSV (download)
@@ -57,14 +61,15 @@ CREATE TABLE hotels(
 );
 ```
 
-
 4. import the earlier .csv into table hotels
-```bash
-COPY hotels
+
+postgres=# COPY hotels
 FROM '/home/nawi/Downloads/hotels.csv'
 DELIMITER ','
 CSV HEADER;
-```
+
+delete from hotels where photo1 IS NULL OR rates_from = 0; <--- hapus baris yang tidak komplit
+
 
 5. then add new column
 ```bash
@@ -141,4 +146,6 @@ number_of_reviews
 from hotels ORDER BY rating_average::float DESC, star_rating::float DESC, number_of_reviews DESC;
 
 ALTER TABLE hotels4listing ADD PRIMARY KEY (hotel_id);
+
+delete from hotels4listing where photo1 IS NULL OR rates_from = 0; <--- hapus baris yang tidak komplit
 ```
