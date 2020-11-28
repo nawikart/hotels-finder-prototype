@@ -6,8 +6,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/nawikart/hotels-finder-prototype/db/psql"
 	"github.com/gorilla/mux"
+	"github.com/nawikart/hotels-finder-prototype/db/psql"
 )
 
 type Listing struct {
@@ -168,7 +168,7 @@ func HotelsFilter(w http.ResponseWriter, r *http.Request) {
 	w.Write(js)
 }
 
-func HotelApi(w http.ResponseWriter, r *http.Request) {
+func HotelByNamekey(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
 
@@ -183,6 +183,37 @@ func HotelApi(w http.ResponseWriter, r *http.Request) {
 
 	rows, err := db.Query(`SELECT hotel_id, hotel_name, city, country, countryisocode, hotel_name_key, city_key, rates_from, rating_average,
 	star_rating, number_of_reviews, overview, photo1, photo2, photo3, photo4 FROM hotels WHERE hotel_name_key = '` + hotelnamekey + `' LIMIT 1`)
+	if err != nil {
+		panic(err)
+	}
+
+	for rows.Next() {
+		err = rows.Scan(&h.Hotel_id, &h.Hotel_name, &h.City, &h.Country, &h.Countryisocode, &h.Hotel_name_key, &h.City_key, &h.Rates_from, &h.Rating_average,
+			&h.Star_rating, &h.Number_of_reviews, &h.Overview, &h.Photo1, &h.Photo2, &h.Photo3, &h.Photo4)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	js, _ := json.Marshal(h)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
+}
+
+func HotelByID(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+
+	vars := mux.Vars(r)
+	hotel_id := vars["hotel_id"]
+
+	db, _ := psql.Connect()
+	defer db.Close()
+
+	var h HotelDetail
+
+	rows, err := db.Query(`SELECT hotel_id, hotel_name, city, country, countryisocode, hotel_name_key, city_key, rates_from, rating_average,
+	star_rating, number_of_reviews, overview, photo1, photo2, photo3, photo4 FROM hotels WHERE hotel_id = '` + hotel_id + `' LIMIT 1`)
 	if err != nil {
 		panic(err)
 	}

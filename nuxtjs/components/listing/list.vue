@@ -175,7 +175,7 @@
                   this.showDetail = false
               }else{                  
                   this.detailProgress = Hotel_id
-                  axios.get(this.$store.state.apiPath +'/front?mod=hotel&hotel_id='+ Hotel_id).then(response => {
+                  axios.get(this.$store.state.apiPath +'/hotel/'+ Hotel_id).then(response => {
                     this.showDetail = Hotel_id
                     this.itemDetail = response.data
                     this.detailProgress = false

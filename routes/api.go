@@ -13,5 +13,6 @@ func APIs(r *mux.Router) {
 	r.HandleFunc("/api/getTop24CitiesPerCountry/{countrykey}", ctx.Top24CitiesPerCountry).Methods("GET")
 	r.HandleFunc("/api/hotels-per-city/{citykey}", ctx.HotelsPerCity).Methods("GET")
 	r.HandleFunc("/api/hotels/{citycountry}/filter/{datafilter}", ctx.HotelsFilter).Methods("GET")
-	r.HandleFunc("/api/hotel/{hotelnamekey}/{city_cc}", ctx.HotelApi).Methods("GET")
+	r.HandleFunc("/api/hotel/{hotelnamekey}/{city_cc}", ctx.HotelByNamekey).Methods("GET")
+	r.HandleFunc("/api/hotel/{hotel_id}", ctx.HotelByID).Methods("GET")
 }
