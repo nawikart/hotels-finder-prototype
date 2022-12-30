@@ -14,7 +14,7 @@
     "@nuxtjs/axios": "^5.0.0",
     "debounce": "^1.1.0",
     "lodash": "^4.17.10",
-    "nuxt": "^1.0.0",
+    "nuxt": "^3.0.0",
     "v-debounce": "^0.1.2",
     "vue-carousel": "^0.7.3",
     "vuetify": "^1.5.16"
@@ -22,6 +22,6 @@
   "devDependencies": {
     "cross-env": "^5.0.1",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1"
+    "stylus-loader": "^7.1.0"
   }
 }
